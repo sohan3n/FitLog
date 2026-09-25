@@ -1,7 +1,10 @@
+import Hero from "@/components/hero-section";
 
 
 export default function Home() {
   return (
-    <h1>Project FitLog!</h1>
+    <div className="w-full">
+      <Hero />
+    </div>
   );
-}
+};

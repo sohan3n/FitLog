@@ -14,16 +14,16 @@ export default function NotFound() {
           className="object-contain rounded-2xl"
         />
       </div>
-      
-      {/* Typography */}
+
       <h1 className="text-3xl md:text-4xl font-black tracking-wide text-white uppercase mb-4">
         404-Missed that lift
       </h1>
-      
+
       <p className="text-gray-400 max-w-md mx-auto mb-8 text-sm md:text-base">
-        The page you wanted is not in the library. Head back to the floor and pick a workout that exists.
+        The page you wanted is not in the library. Head back to the floor and
+        pick a workout that exists.
       </p>
-      
+
       {/* Button */}
       <Link
         href="/"

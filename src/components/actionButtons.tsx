@@ -11,7 +11,6 @@ export default function ActionButtons({ workout }: { workout: Workout }) {
   const isAtCap = plan.length >= 5;
 
   const handleAddToPlan = () => {
-    // 1. Check if cap is reached
     if (isAtCap) {
       toast.error("today's plan is full-finish them first", {
         style: { background: "#333", color: "#fff" }
@@ -19,9 +18,9 @@ export default function ActionButtons({ workout }: { workout: Workout }) {
       return;
     }
 
-    // 2. Check if already added to prevent duplicate success toasts
+    // 2. Check if already added to prevent multiple adding
     const alreadyInPlan = plan.some((w) => w.id === workout.id);
-    addToPlan(workout); // Context handles the actual adding or the "already in" toast
+    addToPlan(workout);
     
     if (!alreadyInPlan) {
       toast.success("Added to today's plan", {

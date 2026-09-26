@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#15171D]">
+      <body className="min-h-full flex flex-col bg-[#0C0D10]">
         <PlanProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

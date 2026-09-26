@@ -8,10 +8,10 @@ export type Workout = {
   name: string;
   equipment: string;
   duration: number;
-  caloriesBurned: number; // Corrected key
+  caloriesBurned: number;
   rating: number;
   image: string;
-  muscleGroups: string[]; // Corrected key
+  muscleGroups: string[];
 };
 
 export default async function Library() {
@@ -87,4 +87,4 @@ export default async function Library() {
       </div>
     </section>
   );
-}
+};

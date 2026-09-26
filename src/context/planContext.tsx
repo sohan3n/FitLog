@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import toast from "react-hot-toast";
 
 export type Workout = {
@@ -19,7 +25,7 @@ type PlanContextType = {
   addToPlan: (workout: Workout) => void;
   removeFromPlan: (id: string | number, silent?: boolean) => void;
   addToSaved: (workout: Workout) => void;
-  saveForLater: (workout: Workout) => void; 
+  saveForLater: (workout: Workout) => void;
   removeFromSaved: (id: string | number) => void;
 };
 
@@ -50,10 +56,10 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   }, [plan, saved]);
 
   const addToPlan = (workout: Workout) => {
-    if (plan.length >= 5) return; 
-    
+    if (plan.length >= 5) return;
+
     if (plan.find((w) => w.id === workout.id)) {
-      toast.error("already in today's plan", {
+      toast.error("Already in today's plan", {
         style: { background: "#333", color: "#fff" },
       });
       return;
@@ -62,17 +68,17 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   };
 
   const removeFromPlan = (id: string | number, silent = false) => {
-  setPlan(plan.filter((w) => w.id !== id));
-  if (!silent) {
-    toast.error("removed from the today's plan", {
-      style: { background: "#333", color: "#fff" },
-    });
-  }
-};
+    setPlan(plan.filter((w) => w.id !== id));
+    if (!silent) {
+      toast.error("Removed from today's plan", {
+        style: { background: "#333", color: "#fff" },
+      });
+    }
+  };
 
   const addToSaved = (workout: Workout) => {
     if (saved.find((w) => w.id === workout.id)) {
-      toast.error("already in the saved", {
+      toast.error("Already in saved", {
         style: { background: "#333", color: "#fff" },
       });
       return;
@@ -86,21 +92,21 @@ export function PlanProvider({ children }: { children: ReactNode }) {
 
   const removeFromSaved = (id: string | number) => {
     setSaved(saved.filter((w) => w.id !== id));
-    toast.error("removed from saved", {
+    toast.error("Removed from saved", {
       style: { background: "#333", color: "#fff" },
     });
   };
 
   return (
     <PlanContext.Provider
-      value={{ 
-        plan, 
-        saved, 
-        addToPlan, 
-        removeFromPlan, 
-        addToSaved, 
-        saveForLater, 
-        removeFromSaved 
+      value={{
+        plan,
+        saved,
+        addToPlan,
+        removeFromPlan,
+        addToSaved,
+        saveForLater,
+        removeFromSaved,
       }}
     >
       {children}

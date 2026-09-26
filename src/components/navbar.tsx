@@ -23,7 +23,7 @@ export default function Navbar() {
   const { plan, saved } = usePlan();
 
   return (
-    <div className="navbar bg-base-100 border-b border-white/10 px-4 md:px-8 py-3">
+    <div className="navbar border-b border-white/10 px-4 md:px-8 py-3  max-w-7xl mx-auto w-full flex items-center justify-between">
       {/* Mobile Menu & Logo */}
       <div className="navbar-start">
         <div className="dropdown">

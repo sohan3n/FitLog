@@ -7,7 +7,7 @@ export type Workout = {
   name: string;
   equipment: string;
   duration: number;
-  calories: number;
+  caloriesBurned: number;
   rating: number;
   image: string;
 };
@@ -18,6 +18,7 @@ type PlanContextType = {
   addToPlan: (workout: Workout) => void;
   removeFromPlan: (id: string | number) => void;
   addToSaved: (workout: Workout) => void;
+  saveForLater: (workout: Workout) => void; // Added here
   removeFromSaved: (id: string | number) => void;
 };
 
@@ -40,7 +41,6 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     return [];
   });
 
-  // Save to localStorage on state changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("fitlog_plan", JSON.stringify(plan));
@@ -65,13 +65,25 @@ export function PlanProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const saveForLater = (workout: Workout) => {
+    addToSaved(workout);
+  };
+
   const removeFromSaved = (id: string | number) => {
     setSaved(saved.filter((w) => w.id !== id));
   };
 
   return (
     <PlanContext.Provider
-      value={{ plan, saved, addToPlan, removeFromPlan, addToSaved, removeFromSaved }}
+      value={{ 
+        plan, 
+        saved, 
+        addToPlan, 
+        removeFromPlan, 
+        addToSaved, 
+        saveForLater, // Provided here
+        removeFromSaved 
+      }}
     >
       {children}
     </PlanContext.Provider>

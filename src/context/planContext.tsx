@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import toast from "react-hot-toast";
 
 export type Workout = {
   id: string | number;
@@ -16,9 +17,9 @@ type PlanContextType = {
   plan: Workout[];
   saved: Workout[];
   addToPlan: (workout: Workout) => void;
-  removeFromPlan: (id: string | number) => void;
+  removeFromPlan: (id: string | number, silent?: boolean) => void;
   addToSaved: (workout: Workout) => void;
-  saveForLater: (workout: Workout) => void; // Added here
+  saveForLater: (workout: Workout) => void; 
   removeFromSaved: (id: string | number) => void;
 };
 
@@ -50,19 +51,33 @@ export function PlanProvider({ children }: { children: ReactNode }) {
 
   const addToPlan = (workout: Workout) => {
     if (plan.length >= 5) return; 
-    if (!plan.find((w) => w.id === workout.id)) {
-      setPlan([...plan, workout]);
+    
+    if (plan.find((w) => w.id === workout.id)) {
+      toast.error("already in today's plan", {
+        style: { background: "#333", color: "#fff" },
+      });
+      return;
     }
+    setPlan([...plan, workout]);
   };
 
-  const removeFromPlan = (id: string | number) => {
-    setPlan(plan.filter((w) => w.id !== id));
-  };
+  const removeFromPlan = (id: string | number, silent = false) => {
+  setPlan(plan.filter((w) => w.id !== id));
+  if (!silent) {
+    toast.error("removed from the today's plan", {
+      style: { background: "#333", color: "#fff" },
+    });
+  }
+};
 
   const addToSaved = (workout: Workout) => {
-    if (!saved.find((w) => w.id === workout.id)) {
-      setSaved([...saved, workout]);
+    if (saved.find((w) => w.id === workout.id)) {
+      toast.error("already in the saved", {
+        style: { background: "#333", color: "#fff" },
+      });
+      return;
     }
+    setSaved([...saved, workout]);
   };
 
   const saveForLater = (workout: Workout) => {
@@ -71,6 +86,9 @@ export function PlanProvider({ children }: { children: ReactNode }) {
 
   const removeFromSaved = (id: string | number) => {
     setSaved(saved.filter((w) => w.id !== id));
+    toast.error("removed from saved", {
+      style: { background: "#333", color: "#fff" },
+    });
   };
 
   return (
@@ -81,7 +99,7 @@ export function PlanProvider({ children }: { children: ReactNode }) {
         addToPlan, 
         removeFromPlan, 
         addToSaved, 
-        saveForLater, // Provided here
+        saveForLater, 
         removeFromSaved 
       }}
     >

@@ -6,13 +6,13 @@ import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-theme="dark" className={`h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-[#15171D]">
         <PlanProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <Toaster/>
+          <Toaster position="bottom-right" />
         </PlanProvider>
       </body>
     </html>
